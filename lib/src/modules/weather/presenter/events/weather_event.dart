@@ -1,8 +1,8 @@
 abstract class WeatherEvent {
-  final String value;
-  const WeatherEvent(this.value);
+  const WeatherEvent();
 }
 
 class GetWeatherEvent extends WeatherEvent {
-  const GetWeatherEvent(super.value);
+  final String value;
+  const GetWeatherEvent(this.value);
 }

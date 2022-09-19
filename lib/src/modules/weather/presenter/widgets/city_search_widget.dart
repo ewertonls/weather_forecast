@@ -40,10 +40,27 @@ class _CitySearchState extends State<CitySearch> {
 
   void _updateVisibility() {
     if (!focusNode.hasFocus) {
-      setState(() {
-        isVisible = false;
-      });
+      _turnOffVisibility();
     }
+  }
+
+  void _search() {
+    focusNode.unfocus();
+    _turnOffVisibility();
+    widget.action.call(cityController.text.trim());
+  }
+
+  void _turnOffVisibility() {
+    setState(() {
+      isVisible = false;
+    });
+  }
+
+  void _turnOnVisibility() {
+    focusNode.requestFocus();
+    setState(() {
+      isVisible = true;
+    });
   }
 
   @override
@@ -57,25 +74,15 @@ class _CitySearchState extends State<CitySearch> {
       return TextFormField(
         controller: cityController,
         focusNode: focusNode,
-        // textAlign: TextAlign.center,
         decoration: const InputDecoration(
           hintText: 'Search city weather forecast',
           filled: true,
         ),
-        onEditingComplete: () {
-          focusNode.unfocus();
-          isVisible = false;
-          setState(() {});
-          widget.action.call(cityController.text.trim());
-        },
+        onEditingComplete: _search,
       );
     }
     return TextButton(
-      onPressed: () {
-        isVisible = true;
-        focusNode.requestFocus();
-        setState(() {});
-      },
+      onPressed: _turnOnVisibility,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

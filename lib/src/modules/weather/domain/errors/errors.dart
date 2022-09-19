@@ -11,3 +11,16 @@ class InvalidTextError extends WeatherFailure {
 class DatasourceError extends WeatherFailure {
   const DatasourceError(super.message, [super.stackTrace]);
 }
+
+class WeatherNotFoundError extends WeatherFailure {
+  const WeatherNotFoundError(super.message, [super.stackTrace]);
+}
+
+class HttpClientError extends WeatherFailure {
+  final int? statusCode;
+  const HttpClientError(
+    String message, {
+    this.statusCode,
+    StackTrace? stackTrace,
+  }) : super(message, stackTrace);
+}

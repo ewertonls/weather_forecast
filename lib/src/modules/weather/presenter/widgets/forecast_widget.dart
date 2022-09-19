@@ -5,7 +5,38 @@ import 'wind_speed_widget.dart';
 
 class ForecastWidget extends StatelessWidget {
   const ForecastWidget({super.key, required this.forecast});
-  final Forecast forecast;
+  final ForecastEntity forecast;
+
+  String month(int month) {
+    final months = <String>[
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    return months.elementAt((month - 1) % 12);
+  }
+
+  String weekDay(int day) {
+    final days = <String>[
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+    return days[day % 7];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,36 +78,5 @@ class ForecastWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String month(int month) {
-    final months = <String>[
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    return months.elementAt((month - 1) % 12);
-  }
-
-  String weekDay(int day) {
-    final days = <String>[
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
-    return days[day % 7];
   }
 }

@@ -8,7 +8,7 @@ import 'wind_speed_widget.dart';
 class WeatherWidget extends StatelessWidget {
   const WeatherWidget({super.key, required this.weather});
 
-  final Weather weather;
+  final WeatherEntity weather;
 
   @override
   Widget build(BuildContext context) {

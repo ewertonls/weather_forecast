@@ -1,36 +1,31 @@
-import 'package:dio/dio.dart';
-
+import '../../../../core/shared/interfaces/http_client_interface.dart';
 import '../../domain/errors/errors.dart';
 import '../../infra/datasources/weather_datasource_interface.dart';
-import '../../infra/models/weather_model.dart';
 
 class GoWeatherDatasource implements IWeatherDatasource {
-  final Dio dio;
-  const GoWeatherDatasource(this.dio);
+  final IHttpClient _client;
+  const GoWeatherDatasource(this._client);
 
   @override
-  Future<WeatherModel> getWeather(String cityName) async {
+  Future<Map<String, dynamic>> getWeather(String cityName) async {
     try {
-      final response =
-          await dio.get('https://goweather.herokuapp.com/weather/$cityName');
-      final data = response.data;
+      final response = await _client
+          .get('https://goweather.herokuapp.com/weather/$cityName');
 
-      if (data == null) {
-        throw const DatasourceError('Empty response.');
-      }
+      final data = response;
 
-      if (data is Map &&
-          (data.containsValue('NOT_FOUND') ||
-              data.values.any((element) => element.isEmpty))) {
-        throw const DatasourceError(
-          'Weather forecast not found for this city.',
+      final dataIsNotFound = data.containsValue('NOT_FOUND');
+      final dataIsEmpty = data.values.any((element) => element.isEmpty);
+
+      if (dataIsNotFound || dataIsEmpty) {
+        throw const WeatherNotFoundError(
+          'Weather forecast not found for city.',
         );
       }
 
-      final weather = WeatherModel.fromMap(data);
-      return weather;
-    } on DioError catch (e, s) {
-      throw DatasourceError(e.message, s);
+      return data;
+    } on HttpClientError catch (e) {
+      throw DatasourceError(e.message);
     }
   }
 }

@@ -1,18 +1,22 @@
+import 'package:dartz/dartz.dart';
+
+import '../../../../core/shared/errors/weather_failure_exception_interface.dart';
 import '../entities/weather_entity.dart';
 import '../errors/errors.dart';
 import '../repositories/weather_repository_interface.dart';
 import 'get_daily_weather_forecast_by_city_name_interface.dart';
 
-class GetDailyWeatherForecastByCityName
+class GetDailyWeatherForecastByCityNameUsecase
     implements IGetDailyWeatherForecastByCityName {
-  final IWeatherRepository repository;
-  const GetDailyWeatherForecastByCityName(this.repository);
+  final IWeatherRepository _repository;
+  const GetDailyWeatherForecastByCityNameUsecase(this._repository);
 
   @override
-  Future<Weather> call(String cityName) async {
+  Future<Either<IAppException, WeatherEntity>> call(String cityName) async {
     if (cityName.trim().isEmpty) {
-      throw const InvalidTextError('City name is empty.');
+      return const Left(InvalidTextError('City name is empty.'));
     }
-    return repository.getWeather(cityName);
+    final weather = await _repository.getWeather(cityName);
+    return weather;
   }
 }

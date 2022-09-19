@@ -12,7 +12,7 @@ class InitialWeatherState extends WeatherState {
 class LoadingWeatherState extends WeatherState {}
 
 class SuccessWeatherState extends WeatherState {
-  final Weather weather;
+  final WeatherEntity weather;
   const SuccessWeatherState(this.weather);
 }
 

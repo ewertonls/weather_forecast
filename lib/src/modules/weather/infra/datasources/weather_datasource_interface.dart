@@ -1,5 +1,5 @@
-import '../models/weather_model.dart';
-
 abstract class IWeatherDatasource {
-  Future<WeatherModel> getWeather(String cityName);
+  Future<Map<String, dynamic>> getWeather(
+    String cityName,
+  );
 }

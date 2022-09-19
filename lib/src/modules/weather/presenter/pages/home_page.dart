@@ -22,11 +22,6 @@ class _HomePageState extends State<HomePage> {
   final cityController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     cityController.dispose();
     super.dispose();
