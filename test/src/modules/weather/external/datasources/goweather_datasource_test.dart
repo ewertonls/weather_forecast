@@ -21,7 +21,7 @@ void main() {
 
     expect(weather, isA<Map<String, dynamic>>());
   });
-  test('should throw a DatasourceError when weather forecast is not found',
+  test('should throw a WeatherNotFoundError when weather forecast is not found',
       () async {
     when(() => dio.get(any())).thenAnswer(
       (invocation) async => GoWeatherResponse.notFoundResponse,
@@ -29,9 +29,10 @@ void main() {
 
     final future = datasource.getWeather('asokdmsdoa');
 
-    expect(future, throwsA(isA<DatasourceError>()));
+    expect(future, throwsA(isA<WeatherNotFoundError>()));
   });
-  test('should throw a DatasourceError when weather forecast values is empty',
+  test(
+      'should throw a WeatherNotFoundError when weather forecast values is empty',
       () async {
     when(() => dio.get(any())).thenAnswer(
       (invocation) async => GoWeatherResponse.emptyResponse,
@@ -39,6 +40,6 @@ void main() {
 
     final future = datasource.getWeather('navespacial');
 
-    expect(future, throwsA(isA<DatasourceError>()));
+    expect(future, throwsA(isA<WeatherNotFoundError>()));
   });
 }
