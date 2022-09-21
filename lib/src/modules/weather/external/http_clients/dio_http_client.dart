@@ -14,13 +14,7 @@ class DioHttpClient implements IHttpClient {
       final data = response.data;
       return data;
     } on DioError catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw HttpClientError(
-          'Weather forecast not found for city.',
-          statusCode: e.response?.statusCode,
-        );
-      }
-      throw HttpClientError(e.message);
+      throw HttpClientError(e.message, statusCode: e.response?.statusCode);
     }
   }
 }

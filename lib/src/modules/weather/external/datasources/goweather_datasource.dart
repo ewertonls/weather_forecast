@@ -25,6 +25,11 @@ class GoWeatherDatasource implements IWeatherDatasource {
 
       return data;
     } on HttpClientError catch (e) {
+      if (e.statusCode == 404) {
+        throw const WeatherNotFoundError(
+          'Weather forecast not found for city.',
+        );
+      }
       throw DatasourceError(e.message);
     }
   }
