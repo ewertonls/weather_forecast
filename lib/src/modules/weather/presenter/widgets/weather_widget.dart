@@ -32,18 +32,20 @@ class WeatherWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         WindSpeed(speed: weather.windSpeed),
+        const SizedBox(height: 8),
         SizedBox(
           height: 200,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            children: weather.forecasts
-                .map(
-                  (forecast) => Center(
-                    child: ForecastWidget(forecast: forecast),
-                  ),
-                )
-                .toList(),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              children: weather.forecasts
+                  .map(
+                    (forecast) => ForecastWidget(forecast: forecast),
+                  )
+                  .toList(),
+            ),
           ),
         )
       ],

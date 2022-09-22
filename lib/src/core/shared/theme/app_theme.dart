@@ -6,11 +6,13 @@ class AppTheme {
 
   static const primaryColor = Color(0xFF4EC3C8);
 
+  static final lightColorScheme = ColorScheme.fromSeed(
+    seedColor: primaryColor,
+  );
+
   static final theme = ThemeData(
     useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: primaryColor,
-    ),
+    colorScheme: lightColorScheme,
     appBarTheme: const AppBarTheme(
       toolbarHeight: 90,
       backgroundColor: Colors.transparent,
@@ -25,6 +27,7 @@ class AppTheme {
         borderSide: BorderSide.none,
       ),
     ),
+    scaffoldBackgroundColor: lightColorScheme.secondaryContainer,
     splashFactory: InkSparkle.splashFactory,
   );
 }

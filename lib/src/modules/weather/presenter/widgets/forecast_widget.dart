@@ -47,11 +47,12 @@ class ForecastWidget extends StatelessWidget {
     final nextDay = today.add(Duration(days: forecast.day));
 
     return Material(
-      color: colorScheme.surfaceVariant,
+      color: colorScheme.primaryContainer.withOpacity(0.2),
       child: InkWell(
         onTap: () {},
         child: Container(
           padding: const EdgeInsets.all(16),
+          alignment: Alignment.center,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -68,6 +69,7 @@ class ForecastWidget extends StatelessWidget {
                 child: Text(
                   forecast.temperature,
                   style: textTheme.titleMedium?.copyWith(
+                    color: colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
