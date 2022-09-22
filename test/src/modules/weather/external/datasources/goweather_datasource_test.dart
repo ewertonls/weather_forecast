@@ -1,8 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import 'package:weather_forecast/src/core/shared/http_clients/dio_http_client.dart';
 import 'package:weather_forecast/src/modules/weather/domain/errors/errors.dart';
 import 'package:weather_forecast/src/modules/weather/external/datasources/goweather_datasource.dart';
-import 'package:weather_forecast/src/modules/weather/external/http_clients/dio_http_client.dart';
 
 import '../../../../core/utils/data/goweather_response.dart';
 import '../../../../core/utils/mocks/mocks.dart';

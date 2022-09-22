@@ -1,7 +1,7 @@
 import 'package:uno/uno.dart';
 
-import '../../../../core/shared/interfaces/http_client_interface.dart';
-import '../../domain/errors/errors.dart';
+import '../../../modules/weather/domain/errors/errors.dart';
+import '../interfaces/http_client_interface.dart';
 
 class UnoHttpClient implements IHttpClient {
   final Uno _uno;
